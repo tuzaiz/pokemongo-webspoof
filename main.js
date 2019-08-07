@@ -1,9 +1,7 @@
 const electron = require('electron')
 const { resolve } = require('path')
 const { execSync } = require('child_process')
-
 const tryCatch = require('./src/try-catch')
-
 const { app } = electron
 const { BrowserWindow } = electron
 
@@ -14,6 +12,7 @@ let win
 
 const createWindow = () => {
   win = new BrowserWindow({ width: 800, height: 800 })
+  win.maximize()
   win.loadURL(`file://${__dirname}/index.html`)
 
   // open external URLs into default browser
@@ -21,19 +20,15 @@ const createWindow = () => {
     e.preventDefault()
     execSync(`open ${url}`)
   })
-
   win.on('closed', () => { win = null })
 }
 
 app.on('ready', () => {
   const tmp = require('tmp')
-
   tmp.dir((err, path) => {
     if (err) throw err
-
     global.tmpProjectPath = path
     createWindow()
-
     execSync(`cp -R ${resolve(__dirname, 'xcode-project')} ${resolve(path)}`)
     execSync(`open ${resolve(path, 'xcode-project/pokemon-webspoof.xcodeproj')}`)
 

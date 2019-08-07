@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+const Path = require('path')
 
 export default {
   entry: [
@@ -7,25 +8,32 @@ export default {
   ],
 
   output: {
-    path: './dist',
+    path: Path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     chunkFilename: '[name].js'
   },
 
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.css$/, loader: 'style!css!postcss' }
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' },
+      { test: /\.json$/, loader: 'json' }
     ]
   },
 
-  postcss: (webpackInstance) => [
-    require('postcss-import')({ addDependencyTo: webpackInstance }),
-    require('precss')()
-  ],
-
-  plugins: process.env.NODE_ENV === 'production' ?
-    [
+  plugins: [
+    // https://github.com/postcss/postcss-loader/issues/99
+    new webpack.LoaderOptionsPlugin({
+      test: /\.css$/,
+      options: {
+        postcss: (webpackInstance) => [
+          require('postcss-import')({ addDependencyTo: webpackInstance }),
+          require('precss')()
+        ],
+        context: __dirname,
+      },
+    }),
+    ...process.env.NODE_ENV === 'production' ? [
       new webpack.LoaderOptionsPlugin({ minimize: false, debug: false }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
@@ -51,5 +59,6 @@ export default {
           comments: false
         }
       })
-    ] : []
+    ] : [],
+  ]
 }

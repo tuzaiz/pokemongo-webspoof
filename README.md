@@ -3,6 +3,10 @@
 >
 > Don't forget to star the project for frequent updates 🙏
 
+**NOT SAFE TO USE ANYMORE** 😢
+
+See: https://github.com/iam4x/pokemongo-webspoof/issues/451
+
 ![Example](./example.gif)
 
 * :arrow_right: Download last release [pokemongo-webspoof.app.tar.gz (v1.2.1)](https://github.com/iam4x/pokemongo-webspoof/releases/download/v1.2.1/pokemongo-webspoof-v121.app.tar.gz)
@@ -12,9 +16,8 @@
 
 * Jump to places with [Algolia Places](https://community.algolia.com/places/) search :rocket:
 * Switch between different speed presets
-* Total distance counter (it differs from Pokémon Go incubator counter?)
+* Total distance counter
 * Current speed counter
-* Include Pokémon spots from a [collaborative map](https://www.google.com/maps/d/u/0/viewer?mid=1vsj869Axn9JdWairc4xU6E_0DhE&hl=en_US) (might not be accurate, will update)
 * Autopilot walk / subway & teleport ([gif example](https://cloud.githubusercontent.com/assets/893837/16966268/0dc2bc02-4e04-11e6-9826-8a844d6f897c.gif))
 
 **NOTE:** To avoid being soft banned, don't change your location to fast: the ban is issued if the server sees you traveling a too long distance in a short amount of time.
@@ -33,7 +36,7 @@
 4. Build & run Xcode project on your connected iPhone
 5. Check the `Auto update Xcode location` in the app when everything is running
 6. Go back to Xcode, click into menu Debug -> Simulate Location -> pokemonLocation ( see hint at [#5:comment](https://github.com/iam4x/pokemongo-webspoof/issues/5#issuecomment-233739078) )
-7. And voilà, you can move with the arrows key and see your character move
+7. And voilà, you can move with the arrow keys and see your character move
 
 **NOTE:** You can also use your keyboard arrows to move on the map 👍
 
@@ -51,7 +54,7 @@
 ## Develop
 
 * Download nodejs^6 (https://nodejs.org/en/)
-* `$ git clone git@github.com:iam4x/pokemongo-webspoof.git`
+* `$ git clone https://github.com/iam4x/pokemongo-webspoof.git`
 * `$ cd pokemongo-webspoof && npm install`
 * `$ npm run dev`
 
